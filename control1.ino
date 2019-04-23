@@ -25,13 +25,17 @@
 #define E1_ENABLE_PIN      30
 
 int x;
-double wE0;
-double wE1;
-double wX;
-double wY;
+int vx;
+int vy;
+int wz;
+int wE0;
+int wE1;
+int wX;
+int wY;
 int ancho = 9;
 int largo = 10;
-double radio = 3.2;
+int radio = 3.2;
+int i = 0;
 
 void setup() 
 {
@@ -57,15 +61,48 @@ void setup()
 }
 void loop() {
 
-vx = analogRead(A0);
-vy = analogRead(A1);
-wz = analogRead(A2);
+//vx = analogRead(A0);
+//vy = analogRead(A1);
+//wz = analogRead(A2);
+vx = 10;
+vy = 5;
+wz = 4;
 
-cinematica;
-
+cinematica();
 
 // mandar wE0, wE1, wX, wY a cada motor correpondiente
-  
+
+if (i % (wX*2) == 0){  
+  digitalWrite(X_STEP_PIN,HIGH);
+}
+if (i % (wY*2) == 0){
+  digitalWrite(Y_STEP_PIN,HIGH);
+}
+if (i % (wE0*2) == 0){
+  digitalWrite(E0_STEP_PIN,HIGH);
+}
+if (i % (wE1*2) == 0){
+  digitalWrite(E1_STEP_PIN,HIGH);
+}
+
+delay(1);
+
+if ( (i-wX) % (wX*2) == 0){
+  digitalWrite(X_STEP_PIN,LOW);
+}
+if ( (i-wY) % (wY*2) == 0){
+  digitalWrite(Y_STEP_PIN,LOW);
+}
+if ( (i-wE0) % (wE0*2) == 0){
+  digitalWrite(E0_STEP_PIN,LOW);
+}
+if ( (i-wE1) % (wE1*2) == 0){
+  digitalWrite(E1_STEP_PIN,LOW);
+}
+
+delay(1);
+
+i = i + 1;
 
 }
 
