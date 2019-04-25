@@ -36,6 +36,10 @@ int ancho = 9;
 int largo = 10;
 int radio = 3.2;
 int i = 0;
+int delayX;
+int delayY;
+int delaywE0;
+int delaywE1;
 
 void setup() 
 {
@@ -64,39 +68,47 @@ void loop() {
 //vx = analogRead(A0);
 //vy = analogRead(A1);
 //wz = analogRead(A2);
-vx = 10;
-vy = 5;
-wz = 4;
+vx = 1/8 * radio;
+vy = 2/8 * radio;
+wz = 3/8 * radio;
 
 cinematica();
 
+delayX = map(wX,0,3/8 * radio,1,3);
+
+delayY = map(wY,0,3/8 * radio,1,3);
+
+delaywE0 = map(wE0,0,3/8 * radio,1,3);
+
+delaywE1 = map(wE1,0,3/8 * radio,1,3);
+
 // mandar wE0, wE1, wX, wY a cada motor correpondiente
 
-if (i % (wX*2) == 0){  
+if (i % (delayX*2) == 0){  
   digitalWrite(X_STEP_PIN,HIGH);
 }
-if (i % (wY*2) == 0){
+if (i % (delayY*2) == 0){
   digitalWrite(Y_STEP_PIN,HIGH);
 }
-if (i % (wE0*2) == 0){
+if (i % (delaywE0*2) == 0){
   digitalWrite(E0_STEP_PIN,HIGH);
 }
-if (i % (wE1*2) == 0){
+if (i % (delaywE1*2) == 0){
   digitalWrite(E1_STEP_PIN,HIGH);
 }
 
 delay(1);
 
-if ( (i-wX) % (wX*2) == 0){
+if ( (i-delayX) % (delayX*2) == 0){
   digitalWrite(X_STEP_PIN,LOW);
 }
-if ( (i-wY) % (wY*2) == 0){
+if ( (i-delayY) % (delayY*2) == 0){
   digitalWrite(Y_STEP_PIN,LOW);
 }
-if ( (i-wE0) % (wE0*2) == 0){
+if ( (i-delaywE0) % (delaywE0*2) == 0){
   digitalWrite(E0_STEP_PIN,LOW);
 }
-if ( (i-wE1) % (wE1*2) == 0){
+if ( (i-delaywE1) % (delaywE1*2) == 0){
   digitalWrite(E1_STEP_PIN,LOW);
 }
 
