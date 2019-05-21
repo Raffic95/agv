@@ -73,6 +73,7 @@ void setup()
   
 }
 void loop() {
+  
 /*asignar los valores de vx(velocidad para adelante), vy(velocidad para el costado), wz(velocidad angular con la 
 que rota el autito. para mas detalles sobre estos parametros buscar el pdf que subio flavio.
 se pueden definir con un potenciometro como hago aca, pero para fines de prueba le damos un valor manualmente.
@@ -80,16 +81,19 @@ vx = analogRead(A0);
 vy = analogRead(A1);
 wz = analogRead(A2);
 */
+
 vx = 0;  //0 a 1 (Surge de algunos calculos)
 vy = 0;  // 0 a 1
 wz = 0.04 ; // 0 a 0.04
 
-//para mover el autito voy a  necesitar que esas velocidades se transformen en velocidades angulares para cada unad de las
-//4 ruedas.
 /*
- antes de realizar los calculos de las velocidades de las ruedas pregunto 
- si la velocidad del auto cambio con respecto a la iteracion anterior
+ para mover el autito voy a  necesitar que esas velocidades se transformen en velocidades angulares para cada unad de las
+ 4 ruedas.
+
+ antes de realizar los calculos de las velocidades de las ruedas pregunto si la velocidad del auto cambio con respecto a 
+ la iteracion anterior.
 */
+
 if ((vx != vxactual) || (vy != vyactual) || (wz != wzactual)) {
 
 /*
@@ -120,6 +124,8 @@ wzactual = wz;
  proporcional, los valores dentro de la funcion map son los valores maximos y minimos que pueden tomar
  el delay y las velocidades
  */
+
+ 
 if (wX < 0 ){
   digitalWrite(X_DIR_PIN,HIGH);
   wXaux = -wX;
